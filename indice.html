@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramo de Tulipanes</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="tulipCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('tulipCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawTulip(x, y, color) {
+            // Tallo
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y - 100);
+            ctx.strokeStyle = 'green';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+
+            // Pétalos
+            ctx.beginPath();
+            ctx.moveTo(x, y - 100);
+            ctx.bezierCurveTo(x - 20, y - 120, x - 20, y - 160, x, y - 140);
+            ctx.bezierCurveTo(x + 20, y - 160, x + 20, y - 120, x, y - 100);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        function drawBouquet() {
+            const colors = ['red', 'yellow', 'pink', 'purple', 'orange'];
+            for (let i = 0; i < 5; i++) {
+                const x = 200 + i * 100;
+                const y = 500;
+                const color = colors[i];
+                drawTulip(x, y, color);
+            }
+        }
+
+        drawBouquet();
+    </script>
+</body>
+</html>
